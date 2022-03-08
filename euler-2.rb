@@ -1,13 +1,10 @@
 num_a = 1
 num_b = 1
-fib = num_b
 sum = 0
-while fib < 4_000_000
-  if fib % 2 == 0
-    sum += fib
+while num_b< 4_000_000
+  if num_b % 2 == 0
+    sum += num_b
   end
-  fib = num_a + num_b
-  num_a = num_b
-  num_b = fib
+  num_a, num_b = num_b, num_a + num_b
 end
 p sum
