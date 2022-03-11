@@ -1,6 +1,6 @@
 n = 1
 i = 0
-while i < 20
+while i < 10_000
   n += 1
   prime = true
   range = (2...n)
