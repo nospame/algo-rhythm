@@ -48,7 +48,7 @@ def alternating_case(string)
 
   i = 0
   while i < string.length
-    new_string += string[i].downcase if i == 0 || i % 2 == 0 
+    new_string += string[i].downcase if i % 2 == 0 
     new_string += string[i].upcase if i % 2 != 0
     i += 1
   end
@@ -58,6 +58,7 @@ end
 
 p alternating_case("hello, how are your porcupines today?")
 p alternating_case("HELLO, how are you?")
+
   
 
 
