@@ -6,16 +6,23 @@
 # Output example: [1, 2, 'FIZZ', 4, 'BUZZ', 'FIZZ', 7, ... 13, 14, 'FIZZBUZZ', 16, 17, 'FIZZ' ...]
 
 def fizz_buzz(numbers)
+  # numbers.map do |number|
+  #   if number % 15 == 0
+  #     "FIZZBUZZ"
+  #   elsif number % 5 == 0
+  #     "BUZZ"
+  #   elsif number % 3 == 0
+  #     "FIZZ"
+  #   else
+  #     number
+  #   end
+  # end
+
   numbers.map do |number|
-    if number % 15 == 0
-      "FIZZBUZZ"
-    elsif number % 5 == 0
-      "BUZZ"
-    elsif number % 3 == 0
-      "FIZZ"
-    else
-      number
-    end
+    output = ''
+    output += "FIZZ" if number % 3 == 0
+    output += "BUZZ" if number % 5 == 0
+    output != '' ? output : number
   end
 end
 
