@@ -40,5 +40,36 @@ def collatz_steps(n)
   end
 end
 
-p collatz_steps(12)
-p collatz_steps(27)
+# p collatz_steps(12)
+# p collatz_steps(27)
+
+
+# A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
+
+# Find the largest palindrome made from the product of two 3-digit numbers.
+
+def largest_palindrome_multiple(digits)
+  # inefficient: probably don't run this for more than 4 digits
+  max_num = ("9" * digits).to_i
+  min_num = ("9" * (digits - 1)).to_i
+
+  num1 = max_num
+  large_palindrome = 0
+  while num1 > min_num
+    num2 = num1
+    while num2 > min_num
+      product = num1 * num2
+      if product.digits == product.digits.reverse
+        large_palindrome = product if product > large_palindrome
+        break
+      else
+        num2 -= 1
+      end
+    end
+    num1 -= 1
+  end
+  return large_palindrome
+end
+
+p largest_palindrome_multiple(2)
+p largest_palindrome_multiple(4)
