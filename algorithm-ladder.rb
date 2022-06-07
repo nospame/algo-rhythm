@@ -21,16 +21,23 @@
 # Resulting in 9 steps. So for input n = 12, the return value would be 9.
 
 def collatz_steps(n)
-  count = 0
-  until n == 1
-    if n % 2 == 0
-      n /= 2
-    else
-      n = 3 * n + 1
-    end
-    count += 1
+
+  # until n == 1
+  #   if n % 2 == 0
+  #     n /= 2
+  #   else
+  #     n = 3 * n + 1
+  #   end
+  #   count += 1
+  # end
+  # return count
+
+  if n == 1
+    return 0
+  else
+    n = n % 2 == 0 ? n / 2 : 3 * n + 1
+    return collatz_steps(n) + 1
   end
-  return count
 end
 
 p collatz_steps(12)
