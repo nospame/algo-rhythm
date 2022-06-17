@@ -72,4 +72,41 @@ def largest_palindrome_multiple(digits)
 end
 
 p largest_palindrome_multiple(2)
-p largest_palindrome_multiple(4)
+# p largest_palindrome_multiple(4)
+
+
+# Given an array of numbers, return a new array containing just two numbers (from the original array) that add up to the number 10. If there are no two numbers that add up to 10, return false.
+
+# Specifically use nested loops to solve this exercise even though there are other approaches as well.
+
+# Input: [2, 5, 3, 1, 0, 7, 11]
+# Output: [3, 7]
+
+# Input: [1, 2, 3, 4, 5]
+# Output: false (While 1, 2, 3, and 4 altogether add up to 10, we're seeking just one pair of numbers.)
+
+# def two_sum(numbers)
+#   for i in 0...numbers.length do
+#     for j in (i + 1)...numbers.length do
+#       return [numbers[i], numbers[j]] if numbers[i] + numbers[j] == 10
+#     end
+#   end
+#   return false
+# end
+
+# p two_sum([2, 5, 3, 1, 0, 7, 11])
+
+def two_sum_linear(numbers)
+  numbers_hash = {}
+  numbers.each do |number|
+    if numbers_hash[number]
+      return [numbers_hash[number], number]
+    else
+      numbers_hash[10 - number] = number
+    end
+  end
+  return false
+end
+
+p two_sum_linear([2, 5, 3, 1, 0, 7, 11])
+
