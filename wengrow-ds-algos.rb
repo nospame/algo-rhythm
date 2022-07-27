@@ -44,3 +44,39 @@ def first_non_duplicate(str)
 end
 
 p first_non_duplicate("minimum") # => "u"
+
+
+#Chapter 9
+# 4.
+class Stack
+  def initialize
+    @data = []
+  end
+
+  def pop
+    @data.pop
+  end
+
+  def push(data)
+    @data.push(data)
+  end
+
+  def read
+    @data.last
+  end
+end
+
+def reverse_string(str)
+  stack = Stack.new
+  reversed_str = ''
+
+  str.each_char { |char| stack.push(char) }
+
+  while stack.read 
+    reversed_str += stack.pop
+  end
+
+  reversed_str
+end
+
+p reverse_string("abcde") # => "edcba"
