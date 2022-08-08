@@ -1,42 +1,108 @@
-def swipe_left(row)
-  row.select! { |num| num != 0 }
-
-  row.each_with_index do |num, i|
-    if row[i + 1] == num
-      row[i] = num * 2
-      row.delete_at(i + 1)
-    end
+class Game
+  def initialize
+    @board = Board.new
+    @board.print_board
   end
-
-  until row.length == 4
-    row.push(0)
-  end
-
-  row
 end
 
-p swipe_left([2, 0, 4, 8]) # => [2, 4, 8, 0]
-p swipe_left([0, 4, 4, 8]) # => [8, 8, 0, 0]
-p swipe_left([2, 2, 4, 4]) # => [4, 8, 0, 0]
+class Board
+  def initialize
+    @board = [
+      [2, 4, 0, 2],
+      [0, 2, 2, 0],
+      [0, 0, 8, 0],
+      [0, 4, 0, 8]
+    ]
+    @added = 0
+  end
 
-def swipe_right(row)
-  row.reverse!
-  row.select! { |num| num != 0 }
+  def print_board
+    puts "------------"
+    @board.each { |row| p row }
+  end
 
-  row.each_with_index do |num, i|
-    if row[i + 1] == num
-      row[i] = num * 2
-      row.delete_at(i + 1)
+  def swipe(row)
+    row.select! { |num| num != 0 }
+
+    row.each_with_index do |num, i|
+      if row[i + 1] == num
+        row[i] = num * 2
+        row.delete_at(i + 1)
+      end
     end
+
+    row
   end
 
-  until row.length == 4
-    row.push(0)
+  def fill_row(row)
+    until row.length == 4
+      if @added == 0
+        row.push([0, 2].sample)
+      else
+        row.push(0)
+      end
+      @added += 1 if row.last == 2
+    end
+    row
   end
 
-  row.reverse
+  def swipe_left
+    @added = 0
+    @board.map do |row|
+      swipe(row)
+      fill_row(row)
+    end
+
+    @board
+  end
+
+  def swipe_right
+    @added = 0
+    @board.map do |row|
+      row.reverse!
+      swipe(row)
+      fill_row(row).reverse!
+    end
+
+    @board
+  end
+
+  def swipe_up
+    @added = 0
+    @board = @board.transpose
+    @board.map do |row|
+      swipe(row)
+      fill_row(row)
+    end
+
+    @board = @board.transpose
+  end
+
+  def swipe_down
+    @added = 0
+    @board = @board.transpose
+    @board.map do |row|
+      row.reverse!
+      swipe(row)
+      fill_row(row).reverse!
+    end
+
+    @board = @board.transpose
+  end
+
 end
 
-p swipe_right([2, 0, 4, 8]) # => [0, 2, 4, 8]
-p swipe_right([0, 4, 4, 8]) # => [0, 0, 8, 8]
-p swipe_right([2, 2, 4, 4]) # => [0, 0, 4, 8]
+board = Board.new
+board.print_board
+
+board.swipe_left
+board.print_board
+
+board.swipe_right
+board.print_board
+
+board.swipe_up
+board.print_board
+
+board.swipe_down
+board.print_board

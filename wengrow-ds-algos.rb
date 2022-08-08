@@ -125,3 +125,61 @@ array = [
     ]
 
 print_numbers(array)
+
+
+# Chapter 11
+# 1.
+def total_chars(arr)
+  return 0 if arr.length == 0
+  return arr[0].length + total_chars(arr[1, arr.length - 1])
+end
+
+strings = ["ab", "c", "def", "ghij"]
+
+p total_chars(strings)
+
+# 2.
+def only_evens(arr)
+  return [] if arr.length == 0
+  if arr[0] % 2 == 0
+    return [arr[0]] + only_evens(arr[1, arr.length - 1])
+  else
+    return only_evens(arr[1, arr.length - 1])
+  end
+end
+
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+p only_evens(numbers)
+
+# 3.
+def triangular_numbers(n)
+  return 1 if n == 1
+  return triangular_numbers(n - 1) + n
+end
+
+p triangular_numbers(7)
+
+# 4.
+# this is classic loop thinking, using an index variable
+# def x_index(str, i = 0)
+#   return i if str[0] == 'x'
+#   return x_index(str[1..], i + 1)
+# end
+
+def x_index(str)
+  return 0 if str[0] == 'x'
+  return x_index(str[1..]) + 1
+end
+
+str = "abcdefghijklmnopqrstuvwxyz"
+
+p x_index(str)
+
+# 5.
+def unique_paths(rows, cols)
+  return 1 if rows == 1 || cols == 1
+  return unique_paths(rows - 1, cols) + unique_paths(rows, cols - 1)
+end
+
+p unique_paths(3, 7)
